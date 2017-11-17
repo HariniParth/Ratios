@@ -17,20 +17,31 @@ public class Ratios {
         
         // Key = Meal Identifier, Value = Meal Quantity
         HashMap<Integer, Integer> meal = new HashMap<>();
-        
         int singlePortion;
         int totalPortions = 0;
-        // Iterate through the HashMap to determine the quantity in 1 portion of the meal
+        // Iterate through the HashMap to determine the quantity in 1 portion of the meal.
         for(Map.Entry<Integer, Integer> entrySet : mealPortions.entrySet()){
-            totalPortions += entrySet.getValue();
+            int mealPortion = entrySet.getValue();
+            totalPortions += mealPortion;
         }
-        singlePortion = total / totalPortions;
+        // Fix issue with allocating non-integer portion counts.
+        singlePortion = (int) Math.ceil(total / totalPortions);
         
         // Return a HashMap with Keys being meal identifiers and values being meal quantities.
         for(Map.Entry<Integer, Integer> entrySet : mealPortions.entrySet()){
-            meal.put(entrySet.getKey(), singlePortion * entrySet.getValue());
+            int mealIdentifier = entrySet.getKey();
+            int mealPortion = entrySet.getValue();
+            // Check if the requested meal quantity is less than or equal to the total portions allocated.
+            int mealQuantity;
+            if(singlePortion * mealPortion <= totalPortions)
+                mealQuantity = singlePortion * mealPortion;
+            else
+                mealQuantity = totalPortions;
+            // Once the meal portion is allocated, reduce the total number of portions.
+            totalPortions -= mealQuantity;
+            
+            meal.put(mealIdentifier, mealQuantity);
         }
-        
         return meal;
     }
     
