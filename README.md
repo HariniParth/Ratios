@@ -21,9 +21,12 @@ If there is no largest remainder, the item with the smallest numeric ID should b
 
 Accepts any number of items and ratios.
 
-At Chewse, we write tests for all of our code. Please write some tests with your solution. The following is a set of inputs and expected results to help you get started:
+The following is a set of inputs and expected results to help you get started:
 
 f({}, 1) —> {}
+
 f({1: 1}, 2) —> {1:2}
+
 f({1: 1}, 0) —> {1: 0}
+
 f({1: 1, 2:1, 3:1},  11) —> {1: 4, 2: 4, 3: 3}
